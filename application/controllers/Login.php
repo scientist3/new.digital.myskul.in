@@ -3,6 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
+	private $data;
+	private $postData;
 
 	public function __construct()
 	{
@@ -25,51 +27,73 @@ class Login extends CI_Controller
 		if ($this->session->userdata('isLogIn'))
 			$this->redirectTo($this->session->userdata('user_role'));
 
-		$this->form_validation->set_rules('email', display('email'), 'required|max_length[50]|valid_email');
-		$this->form_validation->set_rules('password', display('password'), 'required|max_length[32]|md5');
-		$this->form_validation->set_rules('user_role', display('user_role'), 'required');
+		$this->validation();
+		$this->loadData();
+		$this->loadInputData();
 
-		#-------------------------------#
+		if (true === $this->validate()) {
+			$this->redirectTo($this->postData['user_role']);
+		} else {
+			$data['user_role_list'] = $this->login_model->get_user_roles_basic();
+			$this->load->view('login/login_wrapper', $data);
+		}
+	}
+
+	private function loadData()
+	{
+		// Load setting Data
 		$setting = $this->setting_model->read();
-		$data['title'] = (!empty($setting->title) ? $setting->title : null);
-		$data['logo'] = (!empty($setting->logo) ? $setting->logo : null);
-		$data['favicon'] = (!empty($setting->favicon) ? $setting->favicon : null);
-		$data['footer_text'] = (!empty($setting->footer_text) ? $setting->footer_text : null);
 
-		$data['user'] = (object) $postData = [
+		$this->data['title'] = (!empty($setting->title) ? $setting->title : null);
+		$this->data['logo'] = (!empty($setting->logo) ? $setting->logo : null);
+		$this->data['favicon'] = (!empty($setting->favicon) ? $setting->favicon : null);
+		$this->data['footer_text'] = (!empty($setting->footer_text) ? $setting->footer_text : null);
+	}
+	private function loadInputData()
+	{
+		$this->data['user'] = (object) $this->postData = [
 			'email' => $this->input->post('email', true),
 			'password' => md5($this->input->post('password', true)),
 			'user_role' => $this->input->post('user_role', true),
 		];
-		#-------------------------------#
+	}
+	private function validation()
+	{
+		// Validation rules definition
+		$this->form_validation->set_rules('email', display('email'), 'required|max_length[50]|valid_email');
+		$this->form_validation->set_rules('password', display('password'), 'required|max_length[32]|md5');
+		$this->form_validation->set_rules('user_role', display('user_role'), 'required');
+	}
+	private function validate()
+	{
 
 		if ($this->form_validation->run() === true) {
-			$check_user = $this->login_model->check_user($postData);
+			$check_user = $this->login_model->check_user($this->postData);
 			if ($check_user->num_rows() === 1) {
 
 				// Only when cluster head logins
-				if ($postData['user_role'] == 3 && empty($check_user->row()->cluster_idd)) {
+				if ($this->postData['user_role'] == 3 && empty($check_user->row()->cluster_idd)) {
 					$this->session->set_flashdata('exception', 'Cluster not assigned yet. Please Contact organisation head/admin.');
 					redirect('login');
 				}
 
-				if ($postData['user_role'] == 4 && empty($check_user->row()->org_idd)) {
+				if ($this->postData['user_role'] == 4 && empty($check_user->row()->org_idd)) {
 					$this->session->set_flashdata('exception', 'organisation not assigned yet. Please Contact organisation head/cluster head/admin.');
 					redirect('login');
 				}
 
-				if ($postData['user_role'] == 4 && empty($check_user->row()->cluster_idd)) {
+				if ($this->postData['user_role'] == 4 && empty($check_user->row()->cluster_idd)) {
 					$this->session->set_flashdata('exception', 'Cluster not assigned yet. Please Contact organisation head/cluster head/admin.');
 					redirect('login');
 				}
 				//print_r($check_user->row());die;
 				$this->session->set_userdata([
 					'isLogIn' => true,
-					'user_id' => (($postData['user_role'] == 10) ? $check_user->row()->id : $check_user->row()->user_id),
-					'patient_id' => (($postData['user_role'] == 10) ? $check_user->row()->patient_id : null),
+					'user_id' => (($this->postData['user_role'] == 10) ? $check_user->row()->id : $check_user->row()->user_id),
+					'patient_id' => (($this->postData['user_role'] == 10) ? $check_user->row()->patient_id : null),
 					'email' => $check_user->row()->email,
 					'fullname' => $check_user->row()->firstname . ' ' . $check_user->row()->lastname,
-					'user_role' => (($postData['user_role'] == 10) ? 10 : $check_user->row()->user_role),
+					'user_role' => (($this->postData['user_role'] == 10) ? 10 : $check_user->row()->user_role),
 					'picture' => $check_user->row()->picture,
 					'class' => $check_user->row()->class,
 					'org_id' => $check_user->row()->org_idd,
@@ -82,25 +106,14 @@ class Login extends CI_Controller
 					'favicon' => (!empty($setting->favicon) ? $setting->favicon : null),
 					'footer_text' => (!empty($setting->footer_text) ? $setting->footer_text : null),
 				]);
-				$this->redirectTo($postData['user_role']);
+				return true;
 				// can directy redirect here
 			} else {
 				$this->session->set_flashdata('exception', display('incorrect_email_password'));
-				redirect('login');
+				return false;
 			}
-		} else {
-			$data['user_role_list'] = $this->login_model->get_user_roles();
-			$l = [];
-			foreach ($data['user_role_list'] as $k => $v) {
-				if ($k != 1) {
-					$l[$k] = $v;
-				}
-			}
-			$data['user_role_list'] = $l;
-			$this->load->view('login/login_wrapper', $data);
 		}
 	}
-
 	public function redirectTo($user_role = null)
 	{
 		$this->save_login_time();
@@ -147,7 +160,7 @@ class Login extends CI_Controller
 	}
 	public function logout()
 	{
-		// $this->save_logout_time();
+		$this->save_logout_time();
 		$this->session->sess_destroy();
 		redirect('login');
 	}

@@ -90,18 +90,8 @@ $settings = $this->db->select("*,site_align")
 				</div>
 				<div class="input-group mb-3">
 					<?php echo form_dropdown('user_role', $user_role_list, 1 /*$user->user_role*/, 'class="form-control select2bs4" id="user_role" '); ?>
-					<!-- <div class="form-group"> -->
-					<!-- <select class="form-control select2" style="width: 100%;">
-						<option selected="selected">Alabama</option>
-						<option>Alaska</option>
-						<option>California</option>
-						<option>Delaware</option>
-						<option>Tennessee</option>
-						<option>Texas</option>
-						<option>Washington</option>
-					</select> -->
 				</div>
-				<div class="row">
+				<div class="row justify-content-end">
 					<!-- <div class="col-8">
 						<div class="icheck-primary">
 							<input type="checkbox" id="remember">
@@ -111,7 +101,7 @@ $settings = $this->db->select("*,site_align")
 						</div>
 					</div> -->
 					<!-- /.col -->
-					<div class="col-4">
+					<div class="col-6">
 						<button type="submit" class="btn btn-primary btn-block">Sign In</button>
 					</div>
 					<!-- /.col -->
@@ -138,8 +128,8 @@ $settings = $this->db->select("*,site_align")
 		$(function () {
 			// Initialize Select2 dropdown
 			$('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
+				theme: 'bootstrap4'
+			})
 		})
 	</script>
 </body>
