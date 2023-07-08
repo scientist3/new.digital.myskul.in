@@ -50,15 +50,9 @@ class Dashboard extends CI_Controller
 		$data['total_ani_absentee'] = $this->user1_model->total_ani_absentee_today($this->organisation->org_id, $this->user_id);
 		$data['total_std_absentee'] = $this->user1_model->total_std_absentee_today($this->organisation->org_id, $this->user_id);
 
-
-
-
-
 		#--------------------------------------------------#
-		// $data['content'] = $this->load->view('organisation/home', $data, true);
-		// $this->load->view('organisation/layout/main_wrapper_lte_new', $data);
-		$data['content'] = $this->load->view('starter/index', $data, true);
-		$this->load->view('starter/starter_layout', $data);
+		$data['content'] = $this->load->view('organisation/home', $data, true);
+		$this->load->view('organisation/starter/starter_layout', $data);
 	}
 
 	public function profile()

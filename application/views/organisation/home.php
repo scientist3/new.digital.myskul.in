@@ -1,7 +1,7 @@
 <div class="row">
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
-		<div class="small-box bg-aqua" style="color: white!important;">
+		<div class="small-box bg-fuchsia" style="color: white!important;">
 			<div class="inner">
 				<h3>
 					<?php echo !empty($total_clusters) ? $total_clusters : '0'; ?>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-red" style="color: white!important;">
 			<div class="inner">
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-yellow">
 			<div class="inner">
@@ -54,7 +54,7 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-blue">
 			<div class="inner">
@@ -76,9 +76,9 @@
 	<!-- ./col -->
 
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
-		<div class="small-box bg-light-blue">
+		<div class="small-box bg-orange">
 			<div class="inner">
 				<h3>
 					<?php echo !empty($total_logedin_today) ? $total_logedin_today : '0'; ?>
@@ -94,7 +94,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-maroon">
 			<div class="inner">
@@ -111,7 +111,7 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-teal">
 			<div class="inner">
@@ -128,9 +128,9 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
-		<div class="small-box bg-navy-active">
+		<div class="small-box bg-lime">
 			<div class="inner">
 				<h3>
 					<?php echo !empty($total_std_logedin) ? $total_std_logedin : '0'; ?>
@@ -148,11 +148,9 @@
 		</div>
 	</div>
 
-
-
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
-		<div class="small-box bg-light-blue" style="background-color: #52b8f4 !important;">
+		<div class="small-box bg-olive" style="background-color: #52b8f4 !important;">
 			<div class="inner">
 				<h3>
 					<?php echo !empty($total_absentee_today) ? $total_absentee_today : '0'; ?>
@@ -168,7 +166,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-maroon" style="background-color: #ff2172 !important;">
 			<div class="inner">
@@ -185,7 +183,7 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-teal" style="background-color: #45e7e7  !important;">
 			<div class="inner">
@@ -202,9 +200,9 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
-		<div class="small-box bg-navy-active" style="background-color: #002b57 !important;">
+		<div class="small-box bg-navy" style="background-color: #002b57 !important;">
 			<div class="inner">
 				<h3>
 					<?php echo !empty($total_std_absentee) ? $total_std_absentee : '0'; ?>
@@ -221,7 +219,7 @@
 					class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 		<!-- small box -->
 		<div class="small-box bg-green">
 			<div class="inner">
