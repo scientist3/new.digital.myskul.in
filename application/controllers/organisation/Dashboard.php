@@ -55,8 +55,10 @@ class Dashboard extends CI_Controller
 
 
 		#--------------------------------------------------#
-		$data['content'] = $this->load->view('organisation/home', $data, true);
-		$this->load->view('organisation/layout/main_wrapper_lte_new', $data);
+		// $data['content'] = $this->load->view('organisation/home', $data, true);
+		// $this->load->view('organisation/layout/main_wrapper_lte_new', $data);
+		$data['content'] = $this->load->view('starter/index', $data, true);
+		$this->load->view('starter/starter_layout', $data);
 	}
 
 	public function profile()
