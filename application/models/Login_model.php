@@ -32,9 +32,9 @@ class Login_model extends CI_Model
 		} else {
 			#update
 			/*$log->logout_time = date('Y-m-d');
-											$data = (array)$log;
-											$this->db->where('id',$data['id'])
-										->update($this->user_log_tbl ,$data);*/
+												 $data = (array)$log;
+												 $this->db->where('id',$data['id'])
+											 ->update($this->user_log_tbl ,$data);*/
 		}
 	}
 

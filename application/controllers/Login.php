@@ -34,8 +34,8 @@ class Login extends CI_Controller
 		if (true === $this->validate()) {
 			$this->redirectTo($this->postData['user_role']);
 		} else {
-			$data['user_role_list'] = $this->login_model->get_user_roles_basic();
-			$this->load->view('login/login_wrapper', $data);
+			$this->data['user_role_list'] = $this->login_model->get_user_roles_basic();
+			$this->load->view('login/login_wrapper', $this->data);
 		}
 	}
 
@@ -118,11 +118,11 @@ class Login extends CI_Controller
 	{
 		$this->save_login_time();
 		switch ($user_role) {
-			case 1:
-				redirect('dashboard_admin/dashboard_cfo/index'); // Admin-   CFO
-				break;
+			// case 1:
+			// 	redirect('dashboard_admin/dashboard_cfo/index'); // Admin-   CFO
+			// 	break;
 			case 2:
-				redirect('dashboard_org/dashboard_org/index'); // Coordinator
+				redirect('organisation/dashboard/index'); // Coordinator
 				break;
 			case 3:
 				redirect('dashboard_cor/dashboard_cor/index'); // Coordinator
