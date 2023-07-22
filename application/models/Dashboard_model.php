@@ -56,33 +56,33 @@ class Dashboard_model extends CI_Model
 			->row();
 	}
 
-	public function get_user_roles1()
-	{
-		return $this->db->select('ur_id,ur_role')
-			->from('user_role')
-			->where('ur_status', '1')
-			->get()
-			->result_array();
-	}
+	// public function get_user_roles1()
+	// {
+	// 	return $this->db->select('ur_id,ur_role')
+	// 		->from('user_role')
+	// 		->where('ur_status', '1')
+	// 		->get()
+	// 		->result_array();
+	// }
 
-	public function get_user_roles()
-	{
-		$result = $this->db->select('ur_id,ur_role')
-			->from('user_role')
-			->where('ur_status', '1')
-			->get()
-			->result();
+	// public function get_user_roles()
+	// {
+	// 	$result = $this->db->select('ur_id,ur_role')
+	// 		->from('user_role')
+	// 		->where('ur_status', '1')
+	// 		->get()
+	// 		->result();
 
-		$list[''] = display('select_user_role');
-		if (!empty($result)) {
-			foreach ($result as $value) {
-				$list[$value->ur_id] = display($value->ur_role);
-			}
-			return $list;
-		} else {
-			return false;
-		}
-	}
+	// 	$list[''] = display('select_user_role');
+	// 	if (!empty($result)) {
+	// 		foreach ($result as $value) {
+	// 			$list[$value->ur_id] = display($value->ur_role);
+	// 		}
+	// 		return $list;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 
 	public function notify()
 	{

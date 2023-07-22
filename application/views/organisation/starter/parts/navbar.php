@@ -9,7 +9,10 @@
 			<a href="../../index3.html" class="nav-link">Home</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="#" class="nav-link">Contact</a>
+			<a href="<?php echo base_url('organisation/dashboard/profile'); ?>" class="nav-link">Profile</a>
+		</li>
+		<li class="nav-item d-none d-sm-inline-block">
+			<a href="<?php echo base_url("logout") ?>" class="nav-link">Logout</a>
 		</li>
 	</ul>
 

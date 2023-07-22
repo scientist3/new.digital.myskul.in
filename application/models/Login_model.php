@@ -32,9 +32,9 @@ class Login_model extends CI_Model
 		} else {
 			#update
 			/*$log->logout_time = date('Y-m-d');
-												 $data = (array)$log;
-												 $this->db->where('id',$data['id'])
-											 ->update($this->user_log_tbl ,$data);*/
+														$data = (array)$log;
+														$this->db->where('id',$data['id'])
+													->update($this->user_log_tbl ,$data);*/
 		}
 	}
 
@@ -103,45 +103,45 @@ class Login_model extends CI_Model
 			->row();
 	}
 
-	public function get_user_roles()
-	{
-		$result = $this->db->select('ur_id,ur_role')
-			->from('user_role')
-			->where('ur_status', '1')
-			->get()
-			->result();
+	// public function get_user_roles()
+	// {
+	// 	$result = $this->db->select('ur_id,ur_role')
+	// 		->from('user_role')
+	// 		->where('ur_status', '1')
+	// 		->get()
+	// 		->result();
 
-		$list[''] = display('select_user_role');
-		if (!empty($result)) {
-			foreach ($result as $value) {
-				$list[$value->ur_id] = display($value->ur_role);
-			}
-			return $list;
-		} else {
-			return false;
-		}
-	}
+	// 	$list[''] = display('select_user_role');
+	// 	if (!empty($result)) {
+	// 		foreach ($result as $value) {
+	// 			$list[$value->ur_id] = display($value->ur_role);
+	// 		}
+	// 		return $list;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 
-	public function get_user_roles_basic()
-	{
-		$result = $this->db->select('ur_id,ur_role')
-			->from('user_role')
-			->where('ur_status', '1')
-			->get()
-			->result();
+	// public function get_user_roles_basic()
+	// {
+	// 	$result = $this->db->select('ur_id,ur_role')
+	// 		->from('user_role')
+	// 		->where('ur_status', '1')
+	// 		->get()
+	// 		->result();
 
-		$list[''] = display('select_user_role');
-		if (!empty($result)) {
-			foreach ($result as $value) {
-				if ($value->ur_id != 1) {
-					$list[$value->ur_id] = display($value->ur_role);
-				}
-			}
-			return $list;
-		} else {
-			return false;
-		}
-	}
+	// 	$list[''] = display('select_user_role');
+	// 	if (!empty($result)) {
+	// 		foreach ($result as $value) {
+	// 			if ($value->ur_id != 1) {
+	// 				$list[$value->ur_id] = display($value->ur_role);
+	// 			}
+	// 		}
+	// 		return $list;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 
 	// Not Used
 	public function notify()

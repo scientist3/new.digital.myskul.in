@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller
 
 		$this->load->model(
 			array(
+				'userrole_model',
 				'dashboard_model',
 				'setting_model',
 				'user_model',
@@ -32,7 +33,7 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$data['title'] = "Admin";
-		$data['user_role_list'] = $this->dashboard_model->get_user_roles();
+		$data['user_role_list'] = $this->userrole_model->read_basic_as_list();
 		//print_r($data['organisation']);
 		#--------------------------------------------------#
 		$data['total_clusters'] = $this->cluster_model->total_clusters_of_org($this->organisation->org_id);
@@ -49,23 +50,29 @@ class Dashboard extends CI_Controller
 		$data['total_cor_absentee'] = $this->user1_model->total_cor_absentee_today($this->organisation->org_id, $this->user_id);
 		$data['total_ani_absentee'] = $this->user1_model->total_ani_absentee_today($this->organisation->org_id, $this->user_id);
 		$data['total_std_absentee'] = $this->user1_model->total_std_absentee_today($this->organisation->org_id, $this->user_id);
-
+		$data['dashboard'] = 'active';
+		// $data['attendence_menu'] = 'menu-open';
+		// $data['attendence_by_rcc'] = 'active';
+		// $data['absentee_report'] = 'active';
 		#--------------------------------------------------#
 		$data['content'] = $this->load->view('organisation/home', $data, true);
 		$this->load->view('organisation/starter/starter_layout', $data);
 	}
-
 	public function profile()
 	{
 		if ($this->session->userdata('isLogIn') == false)
 			redirect('login');
-		$data['title'] = display('profile');
+		$data['title'] = 					display('profile');
 		#------------------------------# 
-		$user_id = $this->session->userdata('user_id');
-		$data['user'] = $this->user_model->read_user_by_id($user_id);
-		$data['user_role_list'] = $this->dashboard_model->get_user_roles();
-		$data['content'] = $this->load->view('organisation/profile', $data, true);
-		$this->load->view('organisation/layout/main_wrapper_lte', $data);
+		$user_id = 								$this->session->userdata('user_id');
+		$data['user'] = 					$this->user_model->read_user_by_id($user_id);
+		$data['user_role_list'] = $this->userrole_model->read_basic_as_list();
+		
+		// $data['content'] = 		$this->load->view('organisation/profile', $data, true);
+		// $this->load->view('organisation/starter/starter_layout', $data);
+		// $this->load->view('organisation/starter/starter_layout', $data);
+		// $data['content'] = 		$this->load->view('organisation/profile-validation', $data,true);
+		$data['content'] = $this->load->view('organisation/profile-validation', $data);
 	}
 
 	public function email_check($email, $user_id)
@@ -107,6 +114,8 @@ class Dashboard extends CI_Controller
 		$this->form_validation->set_rules('date_of_birth', display('date_of_birth'), 'max_length[10]');
 		//$this->form_validation->set_rules('address',display('address'),'required|max_length[255]');
 		$this->form_validation->set_rules('status', display('status'), 'required');
+		
+		$this->form_validation->set_error_delimiters('<p class="text-sm mb-0">','</p>');
 		#-------------------------------#
 		//picture upload
 		$picture = $this->fileupload->do_upload(
@@ -184,13 +193,13 @@ class Dashboard extends CI_Controller
 					'fullname' => $postData['firstname'] . ' ' . $postData['lastname']
 				]);
 			}
-			redirect('organisation/organisation/profile/');
+			redirect('organisation/dashboard/profile/');
 		} else {
 			$user_id = $this->session->userdata('user_id');
 			$data['user'] = $this->dashboard_model->profile($user_id);
-			$data['user_role_list'] = $this->dashboard_model->get_user_roles();
+			$data['user_role_list'] = $this->userrole_model->read_basic_as_list();
 			$data['content'] = $this->load->view('organisation/profile', $data, true);
-			$this->load->view('organisation/layout/main_wrapper_lte', $data);
+			$this->load->view('organisation/starter/starter_layout', $data);
 		}
 	}
 }

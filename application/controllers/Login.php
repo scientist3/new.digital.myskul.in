@@ -12,6 +12,7 @@ class Login extends CI_Controller
 
 		$this->load->model(
 			array(
+				'userrole_model',
 				'login_model',
 				'setting_model',
 			)
@@ -34,7 +35,7 @@ class Login extends CI_Controller
 		if (true === $this->validate()) {
 			$this->redirectTo($this->postData['user_role']);
 		} else {
-			$this->data['user_role_list'] = $this->login_model->get_user_roles_basic();
+			$this->data['user_role_list'] = $this->userrole_model->read_basic_as_list();
 			$this->load->view('login/login_wrapper', $this->data);
 		}
 	}

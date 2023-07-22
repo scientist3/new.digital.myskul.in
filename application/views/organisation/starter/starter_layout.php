@@ -25,6 +25,28 @@
 	<!-- Main content -->
 	<div class="content">
 		<div class="container-fluid">
+			<!-- alert message -->
+			<?php if ($this->session->flashdata('message') != null) { ?>
+				<div class="alert alert-info alert-dismissable" style="font-size: 1rem;">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<?php echo $this->session->flashdata('message'); ?>
+				</div>
+			<?php } ?>
+
+			<?php if ($this->session->flashdata('exception') != null) { ?>
+				<div class="alert alert-danger alert-dismissable" style="font-size: 1rem;">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<?php echo $this->session->flashdata('exception'); ?>
+				</div>
+			<?php } ?>
+
+			<?php if (validation_errors()) { ?>
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<?php echo validation_errors(); ?>
+				</div>
+			<?php } ?>
+
 			<?php echo (!empty($content) ? $content : null) ?>
 		</div><!-- /.container-fluid -->
 	</div>
