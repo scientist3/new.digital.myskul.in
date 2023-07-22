@@ -67,12 +67,12 @@ class Dashboard extends CI_Controller
 		$user_id = 								$this->session->userdata('user_id');
 		$data['user'] = 					$this->user_model->read_user_by_id($user_id);
 		$data['user_role_list'] = $this->userrole_model->read_basic_as_list();
-		
-		// $data['content'] = 		$this->load->view('organisation/profile', $data, true);
-		// $this->load->view('organisation/starter/starter_layout', $data);
+
+		$data['content'] = 		$this->load->view('organisation/profile', $data, true);
+		$this->load->view('organisation/starter/starter_layout', $data);
 		// $this->load->view('organisation/starter/starter_layout', $data);
 		// $data['content'] = 		$this->load->view('organisation/profile-validation', $data,true);
-		$data['content'] = $this->load->view('organisation/profile-validation', $data);
+		// $data['content'] = $this->load->view('organisation/profile-validation', $data);
 	}
 
 	public function email_check($email, $user_id)
@@ -114,8 +114,8 @@ class Dashboard extends CI_Controller
 		$this->form_validation->set_rules('date_of_birth', display('date_of_birth'), 'max_length[10]');
 		//$this->form_validation->set_rules('address',display('address'),'required|max_length[255]');
 		$this->form_validation->set_rules('status', display('status'), 'required');
-		
-		$this->form_validation->set_error_delimiters('<p class="text-sm mb-0">','</p>');
+
+		$this->form_validation->set_error_delimiters('<p class="text-sm mb-0">', '</p>');
 		#-------------------------------#
 		//picture upload
 		$picture = $this->fileupload->do_upload(
@@ -139,7 +139,7 @@ class Dashboard extends CI_Controller
 			'user_id' => $this->input->post('user_id'),
 			'firstname' => $this->input->post('firstname', true),
 			'mobile' => $this->input->post('mobile', true),
-			'email' => /*"std".$this->randStrGen(3,4)."@gmail.com",// */$this->input->post('email'),
+			'email' => /*"std".$this->randStrGen(3,4)."@gmail.com",// */ $this->input->post('email'),
 			//'user_role'     => $this->input->post('user_role'),
 			'picture' => (!empty($picture) ? $picture : $this->input->post('old_picture')),
 			'password' => md5($this->input->post('password')),

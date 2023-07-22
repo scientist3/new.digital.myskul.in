@@ -1,24 +1,3 @@
-<!-- <link rel="stylesheet" href="<?php echo base_url('assets/'); ?>plugins/iCheck/all.css"> -->
-<div class="form-group d-none">
-	<div class="custom-control custom-radio">
-		<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio" checked="">
-		<label for="customRadio2" class="custom-control-label">Custom Radio checked</label>
-	</div>
-	<div class="custom-control custom-radio">
-		<input class="custom-control-input" type="radio" id="customRadio3" disabled="">
-		<label for="customRadio3" class="custom-control-label">Custom Radio disabled</label>
-	</div>
-	<div class="custom-control custom-radio">
-		<input class="custom-control-input custom-control-input-danger" type="radio" id="customRadio4" name="customRadio2"
-			checked="">
-		<label for="customRadio4" class="custom-control-label">Custom Radio with custom color</label>
-	</div>
-	<div class="custom-control custom-radio">
-		<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="radio"
-			id="customRadio5" name="customRadio2">
-		<label for="customRadio5" class="custom-control-label">Custom Radio with custom color outline</label>
-	</div>
-</div>
 <?php $picture = $this->session->userdata('picture'); ?>
 <div class="row">
 	<!-- Left Side -->
@@ -27,9 +6,7 @@
 		<div class="card card-primary card-outline">
 			<div class="card-body box-profile">
 				<div class="text-center">
-					<img class="profile-user-img img-fluid img-circle"
-						src="<?php echo (!empty($picture) ? base_url($picture) : base_url("siteassets/images/no_image.png")) ?>"
-						alt="User profile picture">
+					<img class="profile-user-img img-fluid img-circle" src="<?php echo (!empty($picture) ? base_url($picture) : base_url("siteassets/images/no_image.png")) ?>" alt="User profile picture">
 				</div>
 
 				<h3 class="profile-username text-center">
@@ -191,32 +168,28 @@
 						<div class="form-group row">
 							<label for="inputName" class="col-sm-2 col-form-label">Name</label>
 							<div class="col-sm-10">
-								<input name="firstname" type="text" class="form-control" id="firstname" placeholder="Name"
-									value="<?php echo $user->firstname ?>">
+								<input name="firstname" type="text" class="form-control" id="firstname" placeholder="Name" value="<?php echo $user->firstname ?>">
 							</div>
 						</div>
 						<!-- Email Id-->
 						<div class="form-group row">
 							<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
 							<div class="col-sm-10">
-								<input name="email" type="email" class="form-control" id="email"
-									placeholder="<?php echo display('email') ?>" value="<?php echo $user->email ?>">
+								<input name="email" type="email" class="form-control" id="email" placeholder="<?php echo display('email') ?>" value="<?php echo $user->email ?>">
 							</div>
 						</div>
 						<!-- Password -->
 						<div class="form-group row">
 							<label for="inputName2" class="col-sm-2 col-form-label">Password</label>
 							<div class="col-sm-10">
-								<input name="password" type="password" class="form-control" id="password"
-									placeholder="<?php echo display('password') ?>" value="">
+								<input name="password" type="password" class="form-control" id="password" placeholder="<?php echo display('password') ?>" value="">
 							</div>
 						</div>
 						<!-- Mobile No -->
 						<div class="form-group row">
 							<label for="inputExperience" class="col-sm-2 col-form-label">Phone No</label>
 							<div class="col-sm-10">
-								<input name="mobile" type="text" class="form-control" id="mobile"
-									placeholder="<?php echo display('mobile') ?>" value="<?php echo $user->mobile ?>">
+								<input name="mobile" type="text" class="form-control" id="mobile" placeholder="<?php echo display('mobile') ?>" value="<?php echo $user->mobile ?>">
 							</div>
 						</div>
 						<!-- Sex -->
@@ -259,8 +232,7 @@
 							<label for="inputExperience" class="col-sm-2 col-form-label">Phone No</label>
 							<div class="col-sm-10">
 								<div class="custom-file">
-									<input class="custom-file-input" type="file" name="picture" id="picture"
-										value="<?php echo $user->picture ?>">
+									<input class="custom-file-input" type="file" name="picture" id="picture" value="<?php echo $user->picture ?>">
 									<label class="custom-file-label" for="picture">Choose file</label>
 								</div>
 								<input type="hidden" name="old_picture" value="<?php echo $user->picture ?>">
@@ -312,77 +284,3 @@
 		<!-- /.card -->
 	</div>
 </div>
-<!-- /.row -->
-
-<!-- jQuery -->
-<!-- <script src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/jquery/jquery.min.js"></script>
-<script
-	src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script
-	src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/jquery-validation/jquery.validate.min.js"></script>
-<script
-	src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/jquery-validation/additional-methods.min.js"></script>
-<script src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>dist/js/adminlte.min.js?v=3.2.0"></script> -->
-<!-- jQuery -->
-<script src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/jquery/jquery.min.js"></script>
-
-<!-- jquery-validation -->
-<script src="<?php echo base_url('vendor/almasaeed2010/adminlte/'); ?>plugins/jquery-validation/jquery.validate.min.js"></script>
-<!-- Validation Script -->
-<script>
-	$(function () {
-		// $.validator.setDefaults({
-		// 	submitHandler: function () {
-		// 		alert("Form successful submitted!");
-		// 	}
-		// });
-		$('#js-profile-form').validate({
-			rules: {
-				email: {
-					required: true,
-					email: true,
-				},
-				password: {
-					required: true,
-					minlength: 5
-				},
-				terms: {
-					required: true
-				},
-			},
-			messages: {
-				email: {
-					required: "Please enter a email address",
-					email: "Please enter a valid email address"
-				},
-				password: {
-					required: "Please provide a password",
-					minlength: "Your password must be at least 5 characters long"
-				},
-				terms: "Please accept our terms"
-			},
-			errorElement: 'span',
-			errorPlacement: function (error, element) {
-				error.addClass('invalid-feedback');
-				element.closest('.form-group').append(error);
-			},
-			highlight: function (element, errorClass, validClass) {
-				$(element).addClass('is-invalid');
-			},
-			unhighlight: function (element, errorClass, validClass) {
-				$(element).removeClass('is-invalid');
-			}
-		});
-	});
-</script>
-<!-- 
-<script src="<?php echo base_url('assets/'); ?>plugins/iCheck/icheck.min.js"></script>
-<script>
-	$(function () {
-		//Flat red color scheme for iCheck
-		$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-			checkboxClass: 'icheckbox_flat-green',
-			radioClass: 'iradio_flat-green'
-		})
-	})
-</script> -->
