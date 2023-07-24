@@ -32,7 +32,8 @@ class Dashboard extends CI_Controller
 	}
 	public function index()
 	{
-		$data['title'] = "Admin";
+		$data['title'] = "Orgainisation";
+		$data['PageTitle'] = "Orgainisation Dashboard";
 		$data['user_role_list'] = $this->userrole_model->read_basic_as_list();
 		//print_r($data['organisation']);
 		#--------------------------------------------------#

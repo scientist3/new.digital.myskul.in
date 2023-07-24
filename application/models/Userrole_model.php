@@ -8,43 +8,13 @@ class Userrole_model extends CI_Model
 	{
 		return $this->db->insert($this->table, $data);
 	}
-	public function read_all_as_list(){
-		$result = $this->db->select('ur_id,ur_role')
-			->from('user_role')
-			->where('ur_status', '1')
-			->get()
-			->result();
-
-		$list[''] = display('select_user_role');
-		if (!empty($result)) {
-			foreach ($result as $value) {
-				if ($value->ur_id != 1) {
-					$list[$value->ur_id] = display($value->ur_role);
-				}
-			}
-			return $list;
-		} else {
-			return false;
-		}
+	public function read_all_as_list()
+	{
+		return Userrole::getAllRoleNamesAsArray();
 	}
-	public function read_basic_as_list(){
-		$result = $this->db->select('ur_id,ur_role')
-		->from('user_role')
-		->where('ur_status', '1')
-		->get()
-		->result();
-
-	$list[''] = display('select_user_role');
-	if (!empty($result)) {
-		foreach ($result as $value) {
-			if ($value->ur_id != 1) {
-				$list[$value->ur_id] = display($value->ur_role);
-			}
-		}
-		return $list;
-	} else {
-		return false;
-	}
+	public function read_basic_as_list()
+	{
+		return Userrole::getBasicRoleNamesAsArray();
 	}
 	public function update($data = [])
 	{
@@ -63,4 +33,64 @@ class Userrole_model extends CI_Model
 			return false;
 		}
 	}
+}
+
+class Userrole
+{
+	const ADMIN = 1;
+	const ORGANISATION = 2;
+	const CLUSTER_COORDINATOR = 3;
+	const ANIMATOR = 4;
+	const STUDENT = 5;
+
+	public static function getRoleName($role)
+	{
+		switch ($role) {
+			case self::ADMIN:
+				return 'Admin';
+			case self::ORGANISATION:
+				return 'Organisation';
+			case self::CLUSTER_COORDINATOR:
+				return 'Cluster Coordinator';
+			case self::ANIMATOR:
+				return 'Animator';
+			case self::STUDENT:
+				return 'Student';
+			default:
+				return 'Unknown';
+		}
+	}
+
+	public static function getAllRoleNamesAsArray()
+	{
+		return array(
+			self::ADMIN => 'Admin',
+			self::ORGANISATION => 'Organisation',
+			self::CLUSTER_COORDINATOR => 'Cluster Coordinator',
+			self::ANIMATOR => 'Animator',
+			self::STUDENT => 'Student'
+		);
+	}
+
+	public static function getBasicRoleNamesAsArray()
+	{
+		return array(
+			" " => 'Select User Role',
+			self::ORGANISATION => 'Organisation',
+			self::CLUSTER_COORDINATOR => 'Cluster Coordinator',
+			self::ANIMATOR => 'Animator',
+			self::STUDENT => 'Student'
+		);
+	}
+
+	// public static function getStatus($type)
+	// {
+	// 	switch ($type) {
+	// 		case self::CHILD_FRIENDLY_SPACE:
+	// 		case self::ADOLESCENT_RESOURCE_CENTRE:
+	// 			return 1;
+	// 		default:
+	// 			return 0;
+	// 	}
+	// }
 }

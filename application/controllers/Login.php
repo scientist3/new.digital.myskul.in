@@ -5,11 +5,13 @@ class Login extends CI_Controller
 {
 	private $data;
 	private $postData;
+	private $objUserService;
+
 
 	public function __construct()
 	{
 		parent::__construct();
-
+		$this->load->library('UserService');
 		$this->load->model(
 			array(
 				'userrole_model',
@@ -17,6 +19,9 @@ class Login extends CI_Controller
 				'setting_model',
 			)
 		);
+
+		$this->objUserService	= new $this->userservice();
+		$this->data['user_role_list'] = $this->objUserService->getUserRoleListAsArray();
 	}
 	public function index()
 	{
@@ -35,7 +40,7 @@ class Login extends CI_Controller
 		if (true === $this->validate()) {
 			$this->redirectTo($this->postData['user_role']);
 		} else {
-			$this->data['user_role_list'] = $this->userrole_model->read_basic_as_list();
+			//$this->data['user_role_list'] = $this->userrole_model->read_basic_as_list();
 			$this->load->view('login/login_wrapper', $this->data);
 		}
 	}
@@ -119,19 +124,19 @@ class Login extends CI_Controller
 	{
 		$this->save_login_time();
 		switch ($user_role) {
-			// case 1:
-			// 	redirect('dashboard_admin/dashboard_cfo/index'); // Admin-   CFO
-			// 	break;
-			case 2:
+				// case Userrole::ADMIN:
+				// 	redirect('dashboard_admin/dashboard_cfo/index'); // Admin-   CFO
+				// 	break;
+			case Userrole::ORGANISATION:
 				redirect('organisation/dashboard/index'); // Coordinator
 				break;
-			case 3:
+			case Userrole::CLUSTER_COORDINATOR:
 				redirect('dashboard_cor/dashboard_cor/index'); // Coordinator
 				break;
-			case 4:
+			case Userrole::ANIMATOR:
 				redirect('dashboard_ani/dashboard_ani/index'); // animator
 				break;
-			case 5:
+			case Userrole::STUDENT:
 				redirect('dashboard_std/dashboard_std/index'); // Student
 				break;
 			default:
@@ -165,5 +170,4 @@ class Login extends CI_Controller
 		$this->session->sess_destroy();
 		redirect('login');
 	}
-
 }

@@ -1,6 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Center1_model extends CI_Model {
+class Center1_model extends CI_Model
+{
 
 	private $table = "center";
 
@@ -25,25 +26,24 @@ class Center1_model extends CI_Model {
 		// 		->result();
 		// }
 	}
-	
+
 	public function read_centers_of_cluster_as_list($cluster_ids = [])
 	{
-		$list['']=display('select_center');
+		$list[''] = display('select_center');
 
-		if (count($cluster_ids)!=0) {
+		if (count($cluster_ids) != 0) {
 			$result = $this->db->select("center_id,center_name")
 				->from($this->table)
-				->where_in('center_cluster_id',$cluster_ids)
-				->order_by('center_name','asc')
+				->where_in('center_cluster_id', array_keys($cluster_ids))
+				->order_by('center_name', 'asc')
 				->get()
 				->result();
 
-			foreach($result as $row){
+			foreach ($result as $row) {
 				$list[$row->center_id] = $row->center_name;
 			}
 			return $list;
-
-		}else{
+		} else {
 			return $list;
 		}
 	}

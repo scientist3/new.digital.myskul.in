@@ -143,34 +143,5 @@ class Dashboard_model extends CI_Model
 		return [$query1, $query2];
 	}
 
-	public function district_list()
-	{
-		//''  => "Select District",
-		$district_list = array(
-			'' => 'Select District',
-			'Anantnag' => 'Anantnag',
-			'Bandipore' => 'Bandipore',
-			'Baramulla' => 'Baramulla',
-			'Budgam' => 'Budgam',
-			'Doda' => 'Doda',
-			'Ganderbal' => 'Ganderbal',
-			'Jammu' => 'Jammu',
-			'Kargil' => 'Kargil',
-			'Kathua' => 'Kathua',
-			'Kishtwar' => 'Kishtwar',
-			'Kulgam' => 'Kulgam',
-			'Kupwara' => 'Kupwara',
-			'Leh' => 'Leh',
-			'Poonch' => 'Poonch',
-			'Pulwama' => 'Pulwama',
-			'Rajouri' => 'Rajouri',
-			'Ramban' => 'Ramban',
-			'Reasi' => 'Reasi',
-			'Samba' => 'Samba',
-			'Shopian' => 'Shopian',
-			'Srinagar' => 'Srinagar',
-			'Udhampur' => 'Udhampur'
-		);
-		return $district_list;
-	}
+	
 }
